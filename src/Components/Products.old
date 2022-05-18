@@ -1,0 +1,45 @@
+import React, { useEffect, useState } from 'react';
+import {
+  getProductsPopulars,
+  getProductsByCategory,
+} from '../functions/product';
+import styled from 'styled-components';
+import Product from './Product';
+
+const Products = (props) => {
+  const filter_type = 'cat';
+  const filter_value = '';
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(10);
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  const Container = styled.div`
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  `;
+  const loadProducts = () => {
+    if (filter_type === 'cat') {
+      getProductsByCategory(filter_value).then((res) => {
+        setProducts(res.data);
+      });
+    } else {
+      getProductsPopulars().then((res) => {
+        setProducts(res.data);
+      });
+    }
+  };
+
+  return (
+    <Container>
+      {products.map((item) => (
+        <Product item={item} key={item.id} />
+      ))}
+    </Container>
+  );
+};
+
+export default Products;
