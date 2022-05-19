@@ -1,9 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import { Provider } from 'react-redux';
 
-import { createStore, applyMiddleware } from 'redux';
+import { createStore } from 'redux';
 import logger from 'redux-logger';
 import reducer from './reducers';
 import 'core-js/stable';
@@ -17,13 +19,7 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
 
-//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(
-  reducer,
-  initialState,
-  applyMiddleware(...middlewares)
-);
+const store = createStore(reducer, initialState, composeWithDevTools());
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);

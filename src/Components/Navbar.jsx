@@ -7,6 +7,8 @@ import { Search, ShoppingCartOutlined } from '@mui/icons-material';
 
 import styled from 'styled-components';
 import { mobile } from '../responsive';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 
 const Container = styled.div`
   height: 60px;
@@ -92,12 +94,7 @@ const Navbar = () => {
           <Logo>DecoMaderas</Logo>
           <DrawerBar />
         </Left>
-        <Center>
-          <SearchContainer>
-            <Input placeholder="Buscar" />
-            <Search style={{ color: 'gray', fontSize: 16 }} />
-          </SearchContainer>
-        </Center>
+        <Center></Center>
         <Right>
           <BarItem>REGISTER</BarItem>
           <BarItem>SIGN IN</BarItem>
