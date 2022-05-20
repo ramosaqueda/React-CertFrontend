@@ -1,4 +1,7 @@
-export const setCategory = (payload) => ({
+export const setCategory = (filter, id) => ({
   type: 'SET_CATEGORY',
-  payload,
+  payload: {
+    filter,
+    id,
+  },
 });

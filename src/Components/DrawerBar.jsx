@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -8,15 +10,20 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { Link } from 'react-router-dom';
 
 import Home from '@mui/icons-material/Home';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import Link from '@mui/material/Link';
 
 import { getCategories } from '../functions/category';
 import { FormatAlignJustifyRounded } from '@mui/icons-material';
+import { setCategory } from '../actions';
 
-const DrawerBar = () => {
+import { useDispatch } from 'react-redux';
+
+const DrawerBar = (props) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -44,7 +51,9 @@ const DrawerBar = () => {
   };
 
   const handleClick = (id, e) => {
-    console.log('I:' + id);
+    e.preventDefault();
+    dispatch(setCategory(true, id));
+    navigate('/productos');
   };
 
   const list = (anchor) => (
@@ -53,7 +62,7 @@ const DrawerBar = () => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <Link href="/">
+      <Link to="/">
         <Home />
       </Link>
 
@@ -67,7 +76,7 @@ const DrawerBar = () => {
           <ListItemIcon>
             <LocalShippingIcon />
           </ListItemIcon>
-          <ListItemText primary="Seguimiento en linea" to="#" />
+          <ListItemText primary="Seguimiento en linea" to="/" />
         </ListItem>
         <Divider />
         <br />
